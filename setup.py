@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="graphsp",                     # This is the name of the package
-    version="0.0.2",                        # The initial release version
+    version="1.0.0",                        # The initial release version
     author="Jainam Shah",                     # Full name of the author
     description="Graphsp Package for Graph Data Structure",
     # Long description read from the the readme file
