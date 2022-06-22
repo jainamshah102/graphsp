@@ -16,6 +16,24 @@ class Graph:
             display += "\n"
         return display
 
+    def __cycle_detection(self, node, parent, visited, stack):
+        visited[node] = True
+        stack[node] = True
+
+        for neighbour, dist in self.get_neighbours(node):
+            if (self.__graph_type == "directed" and stack[neighbour]):
+                return True
+
+            if (visited[neighbour] == False and self.__cycle_detection(neighbour, node, visited, stack)):
+                if (self.__graph_type == "undirected" and parent != neighbour):
+                    return True
+                elif(self.__graph_type == "directed"):
+                    return True
+
+        stack[node] = False
+
+        return False
+
     def link(self, source, dest, weight=1):
         # Linking edges in the graph based on the type of the graph
         if (self.__graph_type == "directed"):
@@ -56,3 +74,32 @@ class Graph:
     def get_graph_type(self):
         # Returns graph type -> directed / undirected
         return self.__graph_type
+
+    def detect_cycle(self):
+        visited = [False for _ in range(self.__n)]
+        stack = [False for _ in range(self.__n)]
+
+        for node in range(self.__n):
+            if (visited[node]):
+                continue
+
+            if (self.__cycle_detection(node, None, visited, stack)):
+                return True
+        return False
+
+    def get_edges(self):
+        edges = []
+        for node in range(self.__n):
+            for neighbour, dist in self.get_neighbours(node):
+                edges.append([node, neighbour, dist])
+
+        return edges
+
+    def reversed_graph(self):
+        r_graph = Graph(self.__n, "directed")
+        edges = self.get_edges()
+
+        for node, neighbour, dist in edges:
+            r_graph.link(neighbour, node, dist)
+
+        return r_graph

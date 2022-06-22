@@ -22,5 +22,8 @@ setuptools.setup(
     py_modules=["graphsp"],             # Name of the python package
     # Directory of the source code of the package
     package_dir={'': 'graphsp/src'},
-    install_requires=[]                     # Install other dependencies if any
+    install_requires=[],                     # Install other dependencies if any
+    keywords=["graph", "algorithms", "DFS",
+              "BFS", "Dijkstra", "Floyd Warshall"],
+    url="https://github.com/jainam2385/graphsp",
 )
